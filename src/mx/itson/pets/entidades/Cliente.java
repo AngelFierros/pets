@@ -46,7 +46,7 @@ public class Cliente {
             Connection conexion = Conexion.obtener();
             Statement statement = conexion.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("SELECT id, marca, modelo,color, ram, procesador, almacenamiento, os FROM computadora");
+            ResultSet resultSet = statement.executeQuery("SELECT id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo FROM cliente");
 
             while (resultSet.next()) {
                 Cliente c = new Cliente();
