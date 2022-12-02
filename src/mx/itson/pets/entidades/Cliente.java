@@ -5,6 +5,7 @@
 package mx.itson.pets.entidades;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -66,6 +67,31 @@ public class Cliente {
             System.err.println("Ocurrió un error: " + ex.getMessage());
         }
         return clientes;
+    }
+    
+    public static boolean guardar(String nombre, String celular, String domicilio, String nombreMascota, String raza, String servicio, String costo) {
+        boolean resultado = false;
+        try {
+            Connection conexion = Conexion.obtener();
+            String consulta = "INSERT INTO cliente (nombre, celular, domicilio, nombreMascota, raza, servicio, costo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setString(1, nombre);
+            statement.setString(2, celular);
+            statement.setString(3, domicilio);
+            statement.setString(4, nombreMascota);
+            statement.setString(5, raza);
+            statement.setString(6, servicio);
+            statement.setString(7, costo);
+            
+            statement.execute();
+            
+            resultado = statement.getUpdateCount() == 1;
+            
+            
+        } catch (Exception ex) {
+            System.err.println("Ocurrió un error: " + ex.getMessage());
+        }
+        return resultado;
     }
     
     
