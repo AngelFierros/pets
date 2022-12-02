@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- *
+ * Esta clase contiene métodos para realizar una conexión con la base de datos establecida
  * @author Angel
  */
 public class Conexion {
