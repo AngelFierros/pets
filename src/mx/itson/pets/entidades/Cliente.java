@@ -108,6 +108,28 @@ public class Cliente {
     }
     return resultado;
     }
+    public static boolean editar (int id,String nombre, String celular, String domicilio, String nombreMascota, String raza, String servicio, String costo){
+        boolean resultado = false;
+        try{
+        Connection conexion = Conexion.obtener();
+        String consulta = "UPDATE cliente SET nombre = ?, celular = ?,domicilio = ?, nombreMascota = ?, raza = ?, servicio = ? , costo =? WHERE id = ?" ;
+        PreparedStatement statement = conexion.prepareStatement(consulta);
+        statement.setString(1, nombre);
+        statement.setString(2, celular);
+        statement.setString(3, domicilio);
+        statement.setString(4, nombreMascota);
+        statement.setString(5, raza);
+        statement.setString(6, servicio);
+        statement.setString(7, costo);
+        statement.setInt(8,id);
+        
+        statement.execute();
+        conexion.close();
+        }catch(Exception ex){
+        System.err.println("Ocurrio un error:" + ex.getMessage());
+    }
+    return resultado;
+    }
     
     
     
