@@ -5,8 +5,10 @@
 package mx.itson.pets.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.pets.entidades.Cliente;
+
 
 /**
  *
@@ -35,9 +37,9 @@ public class Registro extends javax.swing.JFrame {
         tblRegistro = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        btnAgregar = new javax.swing.JMenuItem();
+        btnEditar = new javax.swing.JMenuItem();
+        btnEliminar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -65,19 +67,29 @@ public class Registro extends javax.swing.JFrame {
 
         jMenu1.setText("Opciones");
 
-        jMenuItem1.setText("Agregar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(btnAgregar);
 
-        jMenuItem4.setText("Editar");
-        jMenu1.add(jMenuItem4);
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnEditar);
 
-        jMenuItem3.setText("Eliminar");
-        jMenu1.add(jMenuItem3);
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnEliminar);
 
         jMenuBar1.add(jMenu1);
 
@@ -111,14 +123,37 @@ public class Registro extends javax.swing.JFrame {
         cargarTable();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         
         ClienteForm form = new ClienteForm(this, true);
        form.setVisible(true);
         
        cargarTable();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+         int renglon = tblRegistro.getSelectedRow();
+        int idCliente = Integer.parseInt(tblRegistro.getModel().getValueAt(renglon,0).toString());
+        ClienteForm form = new ClienteForm(this, true, idCliente);
+        form.setVisible(true);
+        cargarTable();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+         int renglon = tblRegistro.getSelectedRow();
+        if(renglon != -1){
+             int idCliente = Integer.parseInt(tblRegistro.getModel().getValueAt(renglon, 0).toString());        
+             if(Cliente.eliminar(idCliente)){
+             JOptionPane.showMessageDialog(this, "El registro se elimino correctamente", "Registro eliminado", JOptionPane.INFORMATION_MESSAGE);          
+             }else {
+             JOptionPane.showMessageDialog(this, "Ocurrio un error al intentar eliminar el registro", "Error al eliminar", JOptionPane.ERROR_MESSAGE);  
+             }       
+            cargarTable();
+         }else{
+              JOptionPane.showMessageDialog(this, "Ocurrió un error, seleccione una computadora", "Error al seleccionar", JOptionPane.ERROR_MESSAGE);
+         }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     public void cargarTable(){
       List<Cliente> clientes = new Cliente().obtener();
@@ -178,12 +213,12 @@ public class Registro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnAgregar;
+    private javax.swing.JMenuItem btnEditar;
+    private javax.swing.JMenuItem btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblRegistro;
     // End of variables declaration//GEN-END:variables

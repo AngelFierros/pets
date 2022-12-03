@@ -93,6 +93,21 @@ public class Cliente {
         }
         return resultado;
     }
+    public static boolean eliminar(int id){
+     boolean resultado = true;
+        try{
+        Connection conexion = Conexion.obtener();
+        String consulta = "DELETE from cliente WHERE id = ?" ;
+        PreparedStatement statement = conexion.prepareStatement(consulta);
+        statement.setInt(1,id);
+        
+        statement.execute();
+        conexion.close();
+        }catch(Exception ex){
+        System.err.println("Ocurrio un error:" + ex.getMessage());
+    }
+    return resultado;
+    }
     
     
     
