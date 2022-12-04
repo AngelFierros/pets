@@ -9,12 +9,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.pets.entidades.Cliente;
 
-
 /**
  *
  * @author Angel
  */
 public class Registro extends javax.swing.JFrame {
+
+    DefaultTableModel modelo;
 
     /**
      * Creates new form Registro
@@ -35,6 +36,8 @@ public class Registro extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRegistro = new javax.swing.JTable();
+        txtFiltro = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnAgregar = new javax.swing.JMenuItem();
@@ -54,16 +57,23 @@ public class Registro extends javax.swing.JFrame {
 
         tblRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Celular", "Domicilio", "Nombre Mascota", "Raza", "Servicio", "Costo"
+                "Id", "Nombre", "Celular", "Domicilio", "Nombre Mascota", "Raza", "Servicio", "Costo"
             }
         ));
         jScrollPane1.setViewportView(tblRegistro);
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Opciones");
 
@@ -99,20 +109,33 @@ public class Registro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(173, 173, 173)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(50, 50, 50)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(txtFiltro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -120,63 +143,51 @@ public class Registro extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        cargarTable();
+        cargarTable("");
+        tblRegistro.removeColumn(tblRegistro.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        
-        ClienteForm form = new ClienteForm(this, true);
-       form.setVisible(true);
-        
-       cargarTable();
+
+        ClienteForm form = new ClienteForm(this, true, 0);
+        form.setVisible(true);
+
+        cargarTable("");
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-         int renglon = tblRegistro.getSelectedRow();
-        int idCliente = Integer.parseInt(tblRegistro.getModel().getValueAt(renglon,0).toString());
-        ClienteForm form = new ClienteForm(this, true, idCliente);
-        form.setVisible(true);
-        cargarTable();
+
+        int reglon = tblRegistro.getSelectedRow();
+        String id = tblRegistro.getModel().getValueAt(reglon, 0).toString();
+
+        ClienteForm formulario = new ClienteForm(this, true, Integer.parseInt(id));
+        formulario.setVisible(true);
+
+        cargarTable("");
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-         int renglon = tblRegistro.getSelectedRow();
-        if(renglon != -1){
-             int idCliente = Integer.parseInt(tblRegistro.getModel().getValueAt(renglon, 0).toString());        
-             if(Cliente.eliminar(idCliente)){
-             JOptionPane.showMessageDialog(this, "El registro se elimino correctamente", "Registro eliminado", JOptionPane.INFORMATION_MESSAGE);          
-             }else {
-             JOptionPane.showMessageDialog(this, "Ocurrio un error al intentar eliminar el registro", "Error al eliminar", JOptionPane.ERROR_MESSAGE);  
-             }       
-            cargarTable();
-         }else{
-              JOptionPane.showMessageDialog(this, "Ocurrió un error, seleccione una computadora", "Error al seleccionar", JOptionPane.ERROR_MESSAGE);
-         }
+        if (JOptionPane.showConfirmDialog(this, "¿Desea eliminar el registro?", "Seleccione una opcion", JOptionPane.YES_NO_OPTION) == 0) {
+            int renglon = tblRegistro.getSelectedRow();
+            String id = tblRegistro.getModel().getValueAt(renglon, 0).toString();
+            new Cliente().eliminar(Integer.parseInt(id));
+            JOptionPane.showMessageDialog(this,"Se a eliminado el registro", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            
+            cargarTable("");
+
+        } else {
+            cargarTable("");
+        }
+
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    public void cargarTable(){
-      List<Cliente> clientes = new Cliente().obtener();
-      Cliente cliente = new Cliente(); 
-      
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        cargarTable(txtFiltro.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-        DefaultTableModel modelo =  (DefaultTableModel)tblRegistro.getModel();
-        
-       modelo.setRowCount(0);
-          
-        for(Cliente c : clientes ){
-            modelo.addRow(new Object[] {
-            c.getNombre(),
-            c.getCelular(),
-            c.getDomicilio(),
-            c.getNombreMascota(),
-            c.getRaza(),
-            c.getServicio(),
-            c.getCosto()
-        });
-        }
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -212,8 +223,30 @@ public class Registro extends javax.swing.JFrame {
         });
     }
 
+    public void cargarTable(String filtro) {
+        Cliente cliente = new Cliente();
+        List<Cliente> clientes = cliente.obtener(filtro);
+
+        DefaultTableModel modelo = (DefaultTableModel) tblRegistro.getModel();
+        modelo.setRowCount(0);
+
+        for (Cliente c : clientes) {
+            modelo.addRow(new Object[]{
+                c.getId(),
+                c.getNombre(),
+                c.getCelular(),
+                c.getDomicilio(),
+                c.getNombreMascota(),
+                c.getRaza(),
+                c.getServicio(),
+                c.getCosto()
+            });
+
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnAgregar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JMenuItem btnEditar;
     private javax.swing.JMenuItem btnEliminar;
     private javax.swing.JLabel jLabel1;
@@ -221,5 +254,6 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblRegistro;
+    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }
