@@ -41,14 +41,14 @@ public class Cliente {
     private String servicio;
     private String costo;
 
-    public static List<Cliente> obtener() {
+    public static List<Cliente> obtener(String filtro) {
         List<Cliente> clientes = new ArrayList<>();
         try {
             Connection conexion = Conexion.obtener();
-            Statement statement = conexion.createStatement();
-
-            ResultSet resultSet = statement.executeQuery("SELECT id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo FROM cliente");
-
+            PreparedStatement statement = conexion.prepareStatement("SELECT id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo FROM cliente WHERE nombre LIKE ?");
+            statement.setString(1, "%" + filtro + "%");
+            ResultSet resultSet = statement.executeQuery();
+            
             while (resultSet.next()) {
                 Cliente c = new Cliente();
                 c.setId(resultSet.getInt(1));
@@ -67,6 +67,34 @@ public class Cliente {
             System.err.println("Ocurrió un error: " + ex.getMessage());
         }
         return clientes;
+    }
+    
+    public static Cliente obtenerPorId(int id) {
+        Cliente cliente = new Cliente();
+        try {
+            Connection conexion = Conexion.obtener();
+            String query = "SELECT id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo FROM cliente WHERE id = ?";
+            PreparedStatement statement = conexion.prepareStatement(query);
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                cliente.setId(resultSet.getInt(1));
+                cliente.setNombre(resultSet.getString(2));
+                cliente.setCelular(resultSet.getString(3));
+                cliente.setDomicilio(resultSet.getString(4));
+                cliente.setNombreMascota(resultSet.getString(5));
+                cliente.setRaza(resultSet.getString(6));
+                cliente.setServicio(resultSet.getString(7));
+                cliente.setCosto(resultSet.getString(8));
+                
+                //statement.execute();
+            }
+            conexion.close();
+        } catch (Exception e) {
+            System.err.print("Error: " + e.getMessage());
+        }
+        return cliente;
     }
     
     public static boolean guardar(String nombre, String celular, String domicilio, String nombreMascota, String raza, String servicio, String costo) {
@@ -100,20 +128,21 @@ public class Cliente {
         String consulta = "DELETE from cliente WHERE id = ?" ;
         PreparedStatement statement = conexion.prepareStatement(consulta);
         statement.setInt(1,id);
-        
         statement.execute();
+        resultado = statement.getUpdateCount() == 1;
+        
         conexion.close();
         }catch(Exception ex){
         System.err.println("Ocurrio un error:" + ex.getMessage());
     }
     return resultado;
     }
-    public static boolean editar (int id,String nombre, String celular, String domicilio, String nombreMascota, String raza, String servicio, String costo){
+    public static boolean editar (int id, String nombre, String celular, String domicilio, String nombreMascota, String raza, String servicio, String costo){
         boolean resultado = false;
         try{
         Connection conexion = Conexion.obtener();
-        String consulta = "UPDATE cliente SET nombre = ?, celular = ?,domicilio = ?, nombreMascota = ?, raza = ?, servicio = ? , costo =? WHERE id = ?" ;
-        PreparedStatement statement = conexion.prepareStatement(consulta);
+        String query = "UPDATE cliente SET nombre=?, celular=?, domicilio=?, nombreMascota=?, raza=?, servicio=? , costo=? WHERE id = ?" ;
+        PreparedStatement statement = conexion.prepareStatement(query);
         statement.setString(1, nombre);
         statement.setString(2, celular);
         statement.setString(3, domicilio);
@@ -122,22 +151,15 @@ public class Cliente {
         statement.setString(6, servicio);
         statement.setString(7, costo);
         statement.setInt(8,id);
-        
         statement.execute();
+        
+        resultado = statement.getUpdateCount() == 1;
         conexion.close();
         }catch(Exception ex){
         System.err.println("Ocurrio un error:" + ex.getMessage());
     }
     return resultado;
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     /**
