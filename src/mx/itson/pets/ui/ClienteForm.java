@@ -14,19 +14,20 @@ import mx.itson.pets.entidades.Cliente;
 public class ClienteForm extends javax.swing.JDialog {
 
     int id = 0;
-    
+
     /**
      * Creates new form ClienteForm
      */
     public ClienteForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
-        
+
         this.id = id;
         cargarFormulario();
-        
+
     }
-     public void cargarFormulario() {
+
+    public void cargarFormulario() {
         if (this.id != 0) {
             Cliente c = Cliente.obtenerPorId(this.id);
             txtNombre.setText(c.getNombre());
@@ -36,10 +37,11 @@ public class ClienteForm extends javax.swing.JDialog {
             txtRaza.setText(c.getRaza());
             txtServicio.setText(c.getServicio());
             txtCosto.setText(c.getCosto());
-   
+
         }
-    
-     }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,7 +158,7 @@ public class ClienteForm extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        
+
         String nombre = txtNombre.getText();
         String celular = txtCelular.getText();
         String domicilio = txtDomicilio.getText();
@@ -164,12 +166,12 @@ public class ClienteForm extends javax.swing.JDialog {
         String raza = txtRaza.getText();
         String servicio = txtServicio.getText();
         String costo = txtCosto.getText();
-        
-        boolean resultado = this.id ==0 ?
-                Cliente.guardar(nombre, celular, domicilio, nombreMascota, raza, servicio, costo):
-                Cliente.editar(this.id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo);
-        
-        if(resultado){
+
+        boolean resultado = this.id == 0
+                ? Cliente.guardar(nombre, celular, domicilio, nombreMascota, raza, servicio, costo)
+                : Cliente.editar(this.id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo);
+
+        if (resultado) {
             JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } else {
@@ -208,7 +210,7 @@ public class ClienteForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ClienteForm dialog = new ClienteForm(new javax.swing.JFrame(), true,0);
+                ClienteForm dialog = new ClienteForm(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
