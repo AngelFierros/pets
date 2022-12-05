@@ -22,6 +22,7 @@ public class Registro extends javax.swing.JFrame {
      */
     public Registro() {
         initComponents();
+        
     }
 
     /**
@@ -53,20 +54,23 @@ public class Registro extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Elephant", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("El Perro Felix");
+        jLabel1.setText("The DogThor");
 
         tblRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Celular", "Domicilio", "Nombre Mascota", "Raza", "Servicio", "Costo"
+                "Id", "Nombre", "Celular", "Domicilio", "Nombre Mascota", "Animal", "Raza", "Servicio", "Costo"
             }
         ));
         jScrollPane1.setViewportView(tblRegistro);
+        if (tblRegistro.getColumnModel().getColumnCount() > 0) {
+            tblRegistro.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -237,6 +241,7 @@ public class Registro extends javax.swing.JFrame {
                 c.getCelular(),
                 c.getDomicilio(),
                 c.getNombreMascota(),
+                c.getAnimal(),
                 c.getRaza(),
                 c.getServicio(),
                 c.getCosto()

@@ -34,6 +34,7 @@ public class ClienteForm extends javax.swing.JDialog {
             txtCelular.setText(c.getCelular());
             txtDomicilio.setText(c.getDomicilio());
             txtNombreMascota.setText(c.getNombreMascota());
+            cbxAnimal.setSelectedItem(c.getAnimal());
             txtRaza.setText(c.getRaza());
             txtServicio.setText(c.getServicio());
             txtCosto.setText(c.getCosto());
@@ -66,6 +67,8 @@ public class ClienteForm extends javax.swing.JDialog {
         txtCelular = new javax.swing.JTextField();
         txtDomicilio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        cbxAnimal = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,6 +93,15 @@ public class ClienteForm extends javax.swing.JDialog {
             }
         });
 
+        jLabel8.setText("Tipo de animal:");
+
+        cbxAnimal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perro", "Gato", "Pez", "Tortuga", "Conejo", "Araña", "Hasmter", "Tucan", "Leon", "Tigre", "Puma", "Alcon", "Aguila", "Cuervo", "Capibara", "PuercoEspin", " " }));
+        cbxAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxAnimalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,6 +123,10 @@ public class ClienteForm extends javax.swing.JDialog {
                     .addComponent(txtCosto)
                     .addComponent(txtCelular)
                     .addComponent(txtDomicilio))
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxAnimal, 0, 154, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(322, Short.MAX_VALUE)
@@ -127,9 +143,13 @@ public class ClienteForm extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCelular))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cbxAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -150,7 +170,7 @@ public class ClienteForm extends javax.swing.JDialog {
                 .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,13 +183,14 @@ public class ClienteForm extends javax.swing.JDialog {
         String celular = txtCelular.getText();
         String domicilio = txtDomicilio.getText();
         String nombreMascota = txtNombreMascota.getText();
+        String animal = cbxAnimal.getSelectedItem() + "";
         String raza = txtRaza.getText();
         String servicio = txtServicio.getText();
         String costo = txtCosto.getText();
 
         boolean resultado = this.id == 0
-                ? Cliente.guardar(nombre, celular, domicilio, nombreMascota, raza, servicio, costo)
-                : Cliente.editar(this.id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo);
+                ? Cliente.guardar(nombre, celular, domicilio, nombreMascota, animal, raza, servicio, costo)
+                : Cliente.editar(this.id, nombre, celular, domicilio, nombreMascota, animal, raza, servicio, costo);
 
         if (resultado) {
             JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
@@ -179,6 +200,10 @@ public class ClienteForm extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void cbxAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAnimalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxAnimalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,6 +249,7 @@ public class ClienteForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cbxAnimal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -231,6 +257,7 @@ public class ClienteForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtDomicilio;

@@ -19,6 +19,20 @@ import mx.itson.pets.persistencia.Conexion;
 public class Cliente {
 
     /**
+     * @return the animal
+     */
+    public String getAnimal() {
+        return animal;
+    }
+
+    /**
+     * @param animal the animal to set
+     */
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    /**
      * @return the id
      */
     public int getId() {
@@ -40,12 +54,13 @@ public class Cliente {
     private String raza;
     private String servicio;
     private String costo;
+    private String animal;
 
     public static List<Cliente> obtener(String filtro) {
         List<Cliente> clientes = new ArrayList<>();
         try {
             Connection conexion = Conexion.obtener();
-            PreparedStatement statement = conexion.prepareStatement("SELECT id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo FROM cliente WHERE nombre LIKE ?");
+            PreparedStatement statement = conexion.prepareStatement("SELECT id, nombre, celular, domicilio, nombreMascota, animal, raza, servicio, costo FROM cliente WHERE nombre LIKE ?");
             statement.setString(1, "%" + filtro + "%");
             ResultSet resultSet = statement.executeQuery();
             
@@ -56,9 +71,10 @@ public class Cliente {
                 c.setCelular(resultSet.getString(3));
                 c.setDomicilio(resultSet.getString(4));
                 c.setNombreMascota(resultSet.getString(5));
-                c.setRaza(resultSet.getString(6));
-                c.setServicio(resultSet.getString(7));
-                c.setCosto(resultSet.getString(8));
+                c.setAnimal(resultSet.getString(6));
+                c.setRaza(resultSet.getString(7));
+                c.setServicio(resultSet.getString(8));
+                c.setCosto(resultSet.getString(9));
                 
 
                 clientes.add(c);
@@ -73,7 +89,7 @@ public class Cliente {
         Cliente cliente = new Cliente();
         try {
             Connection conexion = Conexion.obtener();
-            String query = "SELECT id, nombre, celular, domicilio, nombreMascota, raza, servicio, costo FROM cliente WHERE id = ?";
+            String query = "SELECT id, nombre, celular, domicilio, nombreMascota, animal, raza, servicio, costo FROM cliente WHERE id = ?";
             PreparedStatement statement = conexion.prepareStatement(query);
             statement.setInt(1, id);
 
@@ -84,9 +100,10 @@ public class Cliente {
                 cliente.setCelular(resultSet.getString(3));
                 cliente.setDomicilio(resultSet.getString(4));
                 cliente.setNombreMascota(resultSet.getString(5));
-                cliente.setRaza(resultSet.getString(6));
-                cliente.setServicio(resultSet.getString(7));
-                cliente.setCosto(resultSet.getString(8));
+                cliente.setAnimal(resultSet.getString(6));
+                cliente.setRaza(resultSet.getString(7));
+                cliente.setServicio(resultSet.getString(8));
+                cliente.setCosto(resultSet.getString(9));
                 
                 //statement.execute();
             }
@@ -97,19 +114,20 @@ public class Cliente {
         return cliente;
     }
     
-    public static boolean guardar(String nombre, String celular, String domicilio, String nombreMascota, String raza, String servicio, String costo) {
+    public static boolean guardar(String nombre, String celular, String domicilio, String nombreMascota, String animal, String raza, String servicio, String costo) {
         boolean resultado = false;
         try {
             Connection conexion = Conexion.obtener();
-            String consulta = "INSERT INTO cliente (nombre, celular, domicilio, nombreMascota, raza, servicio, costo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String consulta = "INSERT INTO cliente (nombre, celular, domicilio, nombreMascota, animal, raza, servicio, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(consulta);
             statement.setString(1, nombre);
             statement.setString(2, celular);
             statement.setString(3, domicilio);
             statement.setString(4, nombreMascota);
-            statement.setString(5, raza);
-            statement.setString(6, servicio);
-            statement.setString(7, costo);
+            statement.setString(5, animal);
+            statement.setString(6, raza);
+            statement.setString(7, servicio);
+            statement.setString(8, costo);
             
             statement.execute();
             
@@ -137,20 +155,21 @@ public class Cliente {
     }
     return resultado;
     }
-    public static boolean editar (int id, String nombre, String celular, String domicilio, String nombreMascota, String raza, String servicio, String costo){
+    public static boolean editar (int id, String nombre, String celular, String domicilio, String nombreMascota, String animal, String raza, String servicio, String costo){
         boolean resultado = false;
         try{
         Connection conexion = Conexion.obtener();
-        String query = "UPDATE cliente SET nombre=?, celular=?, domicilio=?, nombreMascota=?, raza=?, servicio=? , costo=? WHERE id = ?" ;
+        String query = "UPDATE cliente SET nombre=?, celular=?, domicilio=?, nombreMascota=?, animal=?, raza=?, servicio=? , costo=? WHERE id = ?" ;
         PreparedStatement statement = conexion.prepareStatement(query);
         statement.setString(1, nombre);
         statement.setString(2, celular);
         statement.setString(3, domicilio);
         statement.setString(4, nombreMascota);
-        statement.setString(5, raza);
-        statement.setString(6, servicio);
-        statement.setString(7, costo);
-        statement.setInt(8,id);
+        statement.setString(5, animal);
+        statement.setString(6, raza);
+        statement.setString(7, servicio);
+        statement.setString(8, costo);
+        statement.setInt(9,id);
         statement.execute();
         
         resultado = statement.getUpdateCount() == 1;
