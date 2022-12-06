@@ -98,14 +98,14 @@ public class ClienteForm extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Celular:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 153, -1, -1));
-        jPanel1.add(txtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 203, 204, 34));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+        jPanel1.add(txtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 204, 34));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 63, 204, 34));
-        jPanel1.add(txtDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 330, 204, 34));
+        jPanel1.add(txtDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 204, 34));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Nombre de la mascota:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 415, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,8 +113,8 @@ public class ClienteForm extends javax.swing.JDialog {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 510, 129, 44));
-        jPanel1.add(txtNombreMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 453, 204, 34));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, 129, 44));
+        jPanel1.add(txtNombreMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 204, 34));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setText("Tipo de animal:");
@@ -122,7 +122,7 @@ public class ClienteForm extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Domicilio:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 281, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
         cbxAnimal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perro", "Gato", "Pez", "Tortuga", "Conejo", "Araña", "Hasmter", "Tucan", "Leon", "Tigre", "Puma", "Alcon", "Aguila", "Cuervo", "Capibara", "PuercoEspin", " " }));
         cbxAnimal.addActionListener(new java.awt.event.ActionListener() {
@@ -134,18 +134,18 @@ public class ClienteForm extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Servicio:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 281, -1, -1));
-        jPanel1.add(txtRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 203, 204, 34));
-        jPanel1.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 325, 204, 34));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, -1, -1));
+        jPanel1.add(txtRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 204, 34));
+        jPanel1.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 204, 34));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setText("Raza:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 153, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setText("Costo:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 415, -1, -1));
-        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 453, 203, 34));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, -1, -1));
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 203, 34));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Nombre:");
@@ -164,12 +164,14 @@ public class ClienteForm extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addGap(103, 103, 103)))
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,11 +191,11 @@ public class ClienteForm extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 760));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
