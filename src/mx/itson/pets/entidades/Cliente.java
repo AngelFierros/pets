@@ -13,7 +13,7 @@ import java.util.List;
 import mx.itson.pets.persistencia.Conexion;
 
 /**
- *
+ * base de datos prueba 1
  * @author Angel
  */
 public class Cliente {
