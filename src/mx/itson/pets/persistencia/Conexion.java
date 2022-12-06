@@ -12,6 +12,10 @@ import java.sql.DriverManager;
  * @author Angel
  */
 public class Conexion {
+    /**
+     * Realiza una conexión con la base de datos
+     * @return una conexión con la base de datos para acceder a ella. 
+     */
     
     public static Connection obtener(){
         Connection conexion =null;

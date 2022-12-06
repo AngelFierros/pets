@@ -13,7 +13,7 @@ import java.util.List;
 import mx.itson.pets.persistencia.Conexion;
 
 /**
- * base de datos prueba 1
+ * 
  * @author Angel
  */
 public class Cliente {
@@ -55,7 +55,11 @@ public class Cliente {
     private String servicio;
     private String costo;
     private String animal;
-
+/**
+ * Arreglo que permite obtener un cliente o una lista de clientes que tienen los parámetros de un cliente
+ * @param filtro
+ * @return Muestra la información de un cliente
+ */
     public static List<Cliente> obtener(String filtro) {
         List<Cliente> clientes = new ArrayList<>();
         try {
@@ -84,7 +88,11 @@ public class Cliente {
         }
         return clientes;
     }
-    
+    /**
+     * Crea un cliente y obtiene por medio de ID las características solicitadas
+     * @param id
+     * @return la columna del cliente por medio del ID
+     */
     public static Cliente obtenerPorId(int id) {
         Cliente cliente = new Cliente();
         try {
@@ -113,7 +121,18 @@ public class Cliente {
         }
         return cliente;
     }
-    
+    /**
+     * Obtiene por medio de los parámetros solicitados un nuevo cliente 
+     * @param nombre
+     * @param celular
+     * @param domicilio
+     * @param nombreMascota
+     * @param animal
+     * @param raza
+     * @param servicio
+     * @param costo
+     * @return guarda la información propocionada de un cliente.
+     */
     public static boolean guardar(String nombre, String celular, String domicilio, String nombreMascota, String animal, String raza, String servicio, String costo) {
         boolean resultado = false;
         try {
@@ -139,6 +158,11 @@ public class Cliente {
         }
         return resultado;
     }
+    /**
+     * Obtiene la lista de la conexión a la base de datos y selecciona un modelo para eliminar
+     * @param id
+     * @return remueve la infomración de un cliente, la columna o cierto dato en específico
+     */
     public static boolean eliminar(int id){
      boolean resultado = true;
         try{
@@ -155,6 +179,19 @@ public class Cliente {
     }
     return resultado;
     }
+    /**
+     * Conexión a la base de datos que permite obtener todos los campos de información de un cñiente
+     * @param id
+     * @param nombre
+     * @param celular
+     * @param domicilio
+     * @param nombreMascota
+     * @param animal
+     * @param raza
+     * @param servicio
+     * @param costo
+     * @return los datos para poder añadir, mover o editar un cliente.
+     */
     public static boolean editar (int id, String nombre, String celular, String domicilio, String nombreMascota, String animal, String raza, String servicio, String costo){
         boolean resultado = false;
         try{

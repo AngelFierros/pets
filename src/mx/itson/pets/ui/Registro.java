@@ -144,13 +144,21 @@ public class Registro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Obtiene el registro desde la tabla, obteniendo los recursos de la base de datos
+ * @param evt 
+ */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         cargarTable("");
         tblRegistro.removeColumn(tblRegistro.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
-
+/**
+ * Crea un nuevo cliente agregando las características. Invoca al método cargarTable
+ * @param evt 
+ */
+    
+    
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
 
@@ -159,7 +167,10 @@ public class Registro extends javax.swing.JFrame {
 
         cargarTable("");
     }//GEN-LAST:event_btnAgregarActionPerformed
-
+/**
+ * Edita el registro proveniente de la base de datos 
+ * @param evt 
+ */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         int reglon = tblRegistro.getSelectedRow();
@@ -170,13 +181,16 @@ public class Registro extends javax.swing.JFrame {
 
         cargarTable("");
     }//GEN-LAST:event_btnEditarActionPerformed
-
+/**
+ * Botón que elimina los registros provenientes de la base de datos solicitando una opción para eliminar
+ * @param evt 
+ */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "¿Desea eliminar el registro?", "Seleccione una opcion", JOptionPane.YES_NO_OPTION) == 0) {
+        if (JOptionPane.showConfirmDialog(this, "¿Desea eliminar el registro?", "Seleccione una opción", JOptionPane.YES_NO_OPTION) == 0) {
             int renglon = tblRegistro.getSelectedRow();
             String id = tblRegistro.getModel().getValueAt(renglon, 0).toString();
             new Cliente().eliminar(Integer.parseInt(id));
-            JOptionPane.showMessageDialog(this,"Se a eliminado el registro", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Se a eliminado el registro", "Información", JOptionPane.INFORMATION_MESSAGE);
             
             cargarTable("");
 
@@ -186,7 +200,10 @@ public class Registro extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnEliminarActionPerformed
-
+/**
+ * Botón que ayuda al usuario en la b´úsqueda de su cliente por medido de un filtro.
+ * @param evt 
+ */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         cargarTable(txtFiltro.getText());
@@ -226,7 +243,11 @@ public class Registro extends javax.swing.JFrame {
             }
         });
     }
-
+/**
+ * Obtiene el registro del cliente con los parámetros que debe tener
+ * @param filtro 
+ *  return: la tabla con los datos del cliente desde la base de datos.
+ */
     public void cargarTable(String filtro) {
         Cliente cliente = new Cliente();
         List<Cliente> clientes = cliente.obtener(filtro);
