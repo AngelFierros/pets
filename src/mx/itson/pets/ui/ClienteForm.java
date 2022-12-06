@@ -26,7 +26,10 @@ public class ClienteForm extends javax.swing.JDialog {
         cargarFormulario();
 
     }
-
+/**
+ * Carga los datos obtenidos por la base de datos
+ * para después insertarlos en un table.
+ */
     public void cargarFormulario() {
         if (this.id != 0) {
             Cliente c = Cliente.obtenerPorId(this.id);
